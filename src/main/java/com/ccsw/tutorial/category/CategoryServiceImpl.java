@@ -1,7 +1,7 @@
 package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
-import com.ccsw.tutorial.category.model.CategoryDTO;
+import com.ccsw.tutorial.category.model.CategoryDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void save(Long id, CategoryDTO categoryDTO) {
+    public void save(Long id, CategoryDto categoryDTO) {
         Category category;
 
         if (id == null) {

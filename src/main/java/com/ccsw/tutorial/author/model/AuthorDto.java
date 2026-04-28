@@ -1,6 +1,6 @@
 package com.ccsw.tutorial.author.model;
 
-public class AuthorDTO {
+public class AuthorDto {
     private Long id;
     private String name;
     private String nationality;

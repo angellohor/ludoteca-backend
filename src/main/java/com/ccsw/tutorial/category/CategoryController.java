@@ -1,7 +1,7 @@
 package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
-import com.ccsw.tutorial.category.model.CategoryDTO;
+import com.ccsw.tutorial.category.model.CategoryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -25,14 +25,14 @@ public class CategoryController {
 
     @Operation(summary = "Find", description = "Method that returns a list of categories")
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<CategoryDTO> findAll() {
+    public List<CategoryDto> findAll() {
         List<Category> categories = categoryService.findAll();
-        return categories.stream().map(e -> mapper.map(e, CategoryDTO.class)).collect(Collectors.toList());
+        return categories.stream().map(e -> mapper.map(e, CategoryDto.class)).collect(Collectors.toList());
     }
 
     @Operation(summary = "Save and Update", description = "Method that saves or updates a category")
     @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-    public void Save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDTO categoryDTO) {
+    public void Save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto categoryDTO) {
         categoryService.save(id, categoryDTO);
     }
 

@@ -1,6 +1,6 @@
 package com.ccsw.tutorial.category;
 
-import com.ccsw.tutorial.category.model.CategoryDTO;
+import com.ccsw.tutorial.category.model.CategoryDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,12 +31,12 @@ public class CategoryIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    ParameterizedTypeReference<List<CategoryDTO>> responseType = new ParameterizedTypeReference<List<CategoryDTO>>() {
+    ParameterizedTypeReference<List<CategoryDto>> responseType = new ParameterizedTypeReference<List<CategoryDto>>() {
     };
 
     @Test
     public void findAllShouldReturnAllCategories() {
-        ResponseEntity<List<CategoryDTO>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
 
         assertNotNull(response);
         assertEquals(3, response.getBody().size());
@@ -47,16 +47,16 @@ public class CategoryIT {
 
     @Test
     public void saveWithoutIdShouldCreateNewCategory() {
-        CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDto categoryDTO = new CategoryDto();
         categoryDTO.setName(NEW_CATEGORY_NAME);
 
         restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.PUT, new HttpEntity<>(categoryDTO), Void.class);
 
-        ResponseEntity<List<CategoryDTO>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
         assertNotNull(response);
         assertEquals(4, response.getBody().size());
 
-        CategoryDTO categorySearch = response.getBody().stream().filter(item -> item.getId().equals(NEW_CATEGORY_ID)).findFirst().orElse(null);
+        CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(NEW_CATEGORY_ID)).findFirst().orElse(null);
 
         assertNotNull(categorySearch);
         assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
@@ -67,17 +67,17 @@ public class CategoryIT {
     @Test
     public void modifyWithExistsIdShouldModifyCategory() {
 
-        CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDto categoryDTO = new CategoryDto();
         categoryDTO.setName(NEW_CATEGORY_NAME);
 
         restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + MODIFY_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(categoryDTO), Void.class);
 
-        ResponseEntity<List<CategoryDTO>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
 
         assertNotNull(response);
         assertEquals(3, response.getBody().size());
 
-        CategoryDTO categorySearch = response.getBody().stream().filter(item -> item.getId().equals(MODIFY_CATEGORY_ID)).findFirst().orElse(null);
+        CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(MODIFY_CATEGORY_ID)).findFirst().orElse(null);
         assertNotNull(categorySearch);
         assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
 
@@ -85,7 +85,7 @@ public class CategoryIT {
 
     @Test
     public void modifyWithNotExistIdShouldInternalError() {
-        CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDto categoryDTO = new CategoryDto();
         categoryDTO.setName(NEW_CATEGORY_NAME);
 
         ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(categoryDTO), Void.class);
@@ -99,7 +99,7 @@ public class CategoryIT {
     public void deleteWithExistsIdShouldDeleteCategory() {
         restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + DELETE_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
 
-        ResponseEntity<List<CategoryDTO>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
 
         assertNotNull(response);
         assertEquals(2, response.getBody().size());

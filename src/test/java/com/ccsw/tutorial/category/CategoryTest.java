@@ -1,7 +1,7 @@
 package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
-import com.ccsw.tutorial.category.model.CategoryDTO;
+import com.ccsw.tutorial.category.model.CategoryDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -43,7 +43,7 @@ public class CategoryTest {
 
     @Test
     public void saveNotExistCategoryIdShouldInsert() {
-        CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDto categoryDTO = new CategoryDto();
         categoryDTO.setName(CATEGORY_NAME);
 
         ArgumentCaptor<Category> category = ArgumentCaptor.forClass(Category.class);
@@ -59,7 +59,7 @@ public class CategoryTest {
 
     @Test
     public void saveExistsCategoryIdShouldUpdate() {
-        CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDto categoryDTO = new CategoryDto();
         categoryDTO.setName(CATEGORY_NAME);
 
         Category category = mock(Category.class);
@@ -75,7 +75,7 @@ public class CategoryTest {
         when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
 
         categoryService.delete(EXISTS_CATEGORY_ID);
-        
+
         verify(categoryRepository).deleteById(EXISTS_CATEGORY_ID);
     }
 }

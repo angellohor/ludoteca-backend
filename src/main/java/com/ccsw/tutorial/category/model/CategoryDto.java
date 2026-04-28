@@ -1,6 +1,6 @@
 package com.ccsw.tutorial.category.model;
 
-public class CategoryDTO {
+public class CategoryDto {
 
     private Long id;
     private String name;
