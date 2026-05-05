@@ -8,3 +8,18 @@ INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
 INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
 INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
 INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
+
+INSERT INTO game(title, age, category_id, author_id) VALUES ('On Mars', '14', 1, 2);
+INSERT INTO game(title, age, category_id, author_id) VALUES ('Aventureros al tren', '8', 3, 1);
+INSERT INTO game(title, age, category_id, author_id) VALUES ('1920: Wall Street', '12', 1, 4);
+INSERT INTO game(title, age, category_id, author_id) VALUES ('Barrage', '14', 1, 3);
+INSERT INTO game(title, age, category_id, author_id) VALUES ('Los viajes de Marco Polo', '12', 1, 3);
+INSERT INTO game(title, age, category_id, author_id) VALUES ('Azul', '8', 3, 5);
+
+INSERT INTO customer(name) VALUES ('Paco');
+INSERT INTO customer(name) VALUES ('Ana');
+INSERT INTO customer(name) VALUES ('Luis');
+
+INSERT INTO rental(game_id, customer_id, start_date, end_date) VALUES (1, 1, '2026-05-10', '2026-05-14');
+INSERT INTO rental(game_id, customer_id, start_date, end_date) VALUES (2, 1, '2026-05-10', '2026-05-14');
+INSERT INTO rental(game_id, customer_id, start_date, end_date) VALUES (3, 2, '2026-05-15', '2026-05-20');

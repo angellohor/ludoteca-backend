@@ -16,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
 
     @Override
+    public Category get(Long id) {
+        return this.categoryRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<Category> findAll() {
         return (List<Category>) this.categoryRepository.findAll();
     }
@@ -27,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (id == null) {
             category = new Category();
         } else {
-            category = this.categoryRepository.findById(id).orElse(null);
+            category = this.get(id);
         }
         category.setName(categoryDTO.getName());
 
@@ -36,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(Long id) throws Exception {
-        if (this.categoryRepository.findById(id).orElse(null) == null) {
+        if (this.get(id) == null) {
             throw new Exception("Not exist");
         }
         this.categoryRepository.deleteById(id);
