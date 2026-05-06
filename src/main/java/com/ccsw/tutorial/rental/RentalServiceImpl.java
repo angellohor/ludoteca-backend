@@ -39,10 +39,10 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Page<Rental> findPage(RentalSearchDto rentalSearchDto) {
 
-        Specification<Rental> spec = new RentalSpecification(new SearchCriteria("game.title", ":", rentalSearchDto.getGameTitle()));
+        Specification<Rental> spec = new RentalSpecification(new SearchCriteria("customer.id", ":", rentalSearchDto.getCustomerId()));
 
-        if (rentalSearchDto.getCustomerName() != null) {
-            spec = spec.and(new RentalSpecification(new SearchCriteria("customer.name", ":", rentalSearchDto.getCustomerName())));
+        if (rentalSearchDto.getGameId() != null) {
+            spec = spec.and(new RentalSpecification(new SearchCriteria("game.id", ":", rentalSearchDto.getGameId())));
         }
         if (rentalSearchDto.getDate() != null) {
             spec = spec.and(new RentalSpecification(new SearchCriteria("startDate", "<=", rentalSearchDto.getDate())));
